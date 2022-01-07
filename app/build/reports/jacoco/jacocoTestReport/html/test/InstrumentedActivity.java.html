@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InstrumentedActivity.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">test</a> &gt; <span class="el_source">InstrumentedActivity.java</span></div><h1>InstrumentedActivity.java</h1><pre class="source lang-java linenums">package test;
+
+import android.os.Environment;
+import android.util.Log;
+
+import com.joyy.codecoverage.MainActivity;
+
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+
+
+<span class="nc" id="L12">public class InstrumentedActivity extends MainActivity {</span>
+<span class="nc" id="L13">    public static String TAG = &quot;[InstrumentedActivity]&quot;;</span>
+
+    @Override
+    public void onDestroy() {
+<span class="nc" id="L17">        super.onDestroy();</span>
+<span class="nc" id="L18">        Log.d(TAG, &quot;onDestroy()&quot;);</span>
+<span class="nc" id="L19">        generateCoverageReport();</span>
+<span class="nc" id="L20">    }</span>
+
+    private void generateCoverageReport() {
+//        String DEFAULT_COVERAGE_FILE_PATH = getFilesDir().getPath() + &quot;/coverage.ec&quot;;
+<span class="nc" id="L24">        String DEFAULT_COVERAGE_FILE_PATH = Environment.getExternalStorageDirectory().getPath() + &quot;/coverage.ec&quot;;</span>
+<span class="nc" id="L25">        Log.d(TAG, &quot;generateCoverageReport():&quot; + DEFAULT_COVERAGE_FILE_PATH);</span>
+        try {
+<span class="nc" id="L27">            OutputStream out = new FileOutputStream(DEFAULT_COVERAGE_FILE_PATH, false);</span>
+<span class="nc" id="L28">            Object agent = Class.forName(&quot;org.jacoco.agent.rt.RT&quot;)</span>
+<span class="nc" id="L29">                    .getMethod(&quot;getAgent&quot;)</span>
+<span class="nc" id="L30">                    .invoke(null);</span>
+
+<span class="nc" id="L32">            out.write((byte[]) agent.getClass().getMethod(&quot;getExecutionData&quot;, boolean.class)</span>
+<span class="nc" id="L33">                    .invoke(agent, false));</span>
+<span class="nc" id="L34">            out.close();</span>
+<span class="nc" id="L35">        } catch (Exception e) {</span>
+<span class="nc" id="L36">            Log.d(TAG, e.toString(), e);</span>
+<span class="nc" id="L37">        }</span>
+<span class="nc" id="L38">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

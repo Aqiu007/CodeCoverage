@@ -1,0 +1,10 @@
+com/joyy/codecoverage/BuildConfig.java
+ com.joyy.codecoverage.BuildConfig
+com/joyy/codecoverage/MainActivity.java
+ com.joyy.codecoverage.MainActivity
+com/joyy/codecoverage/util/MathCalc.java
+ com.joyy.codecoverage.util.MathCalc
+test/InstrumentedActivity.java
+ test.InstrumentedActivity
+test/JacocoInstrumentation.java
+ test.JacocoInstrumentation
